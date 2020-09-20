@@ -44,7 +44,7 @@
         </div>
     </div>
 
-@if ($replies->description)
+@if ($replies->replies)
         @foreach ($replies->replies as $comment)
             @include('replies', ['replies' => $comment])
         @endforeach

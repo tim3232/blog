@@ -34,7 +34,7 @@ class RegisterController extends Controller
      * @var string
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
-    protected $redirectTo = '/admin';
+    protected $redirectTo = '/posts';
 
     /**
      * Create a new controller instance.
@@ -83,7 +83,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'verify_token' => Str::random(),
-            'right' => 1
+            'right' => 1,
         ]);;
         Mail::to($user->email)->send(new VerifyMail($user));
     }
@@ -96,6 +96,7 @@ class RegisterController extends Controller
                 ->with('error', 'Sorry your link cannot be identified.');
         }
 
+        $user->status = User::STATUS_ACTIVE;
         $user->verify_token = null;
         $user->save();
 

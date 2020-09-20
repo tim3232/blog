@@ -39,8 +39,18 @@ class MainController extends Controller
         $this->validate($request, [
             'image' => 'mimes:jpeg,png,jpg,gif,svg',
         ]);
-        Post::create($request->all() + ['user_id' => auth()->user()->id]);
-        return back();
+
+        $post =  Post::create($request->all() + ['user_id' => auth()->user()->id]);
+
+        if($request->hasFile('image')){
+            $imageExtension = $request->file('image')->getClientOriginalExtension();
+            $imageFilename = uniqid().'.'.$imageExtension;
+            $post->image = $imageFilename;
+            $post->save();
+            $request->file('image')->move('images', $imageFilename);
+        }
+
+        return redirect()->route('post',['id' => $post->id]);
     }
 
     public function update_post(Request $request,$id){
