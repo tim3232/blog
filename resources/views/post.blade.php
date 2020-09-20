@@ -69,7 +69,7 @@
             @foreach($post->comments as $comment)
 
                     <div class="media col-md-12">
-                        <img class="mr-3" src="http://fakeimg.pl/50x50" alt="Generic placeholder image">
+                        <img class="user-logo" src="/img/user.png" alt="Generic placeholder image">
 
                         <div class="media-body" style="word-break: break-all;">
                             <h5 class="mt-0">{{$comment->user->name}}
@@ -79,10 +79,14 @@
                                     @endif
                                 @endauth
                             </h5>
+                            <div class="comment-container">
+                                 {{$comment->description}}
+                            </div>
 
-                                {{$comment->description}}
                                 @auth
-                                    <a href="#" data-toggle="modal" style="margin-top: 10px" data-target="#commentReplie{{$comment->id}}">reply</a>
+                                    <a href="#" data-toggle="modal" style="margin-top: 10px" data-target="#commentReplie{{$comment->id}}">
+                                        <i class="fa fa-comment" aria-hidden="true"> Reply</i>
+                                    </a>
                                 @endauth
 
                             @foreach($comment->replies as $replies)

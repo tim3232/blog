@@ -1,22 +1,22 @@
-<div class="media mt-3" style="background: #FFFDDD; padding: 10px; border-radius: 5px">
-
+<div class="media mt-3">
     <a class="pr-3" href="#">
-        <img src="http://fakeimg.pl/50x50" alt="Generic placeholder image">
+        <img class="user-logo" src="/img/user.png" alt="Generic placeholder image">
     </a>
     <div class="media-body">
         <h5 class="mt-0">{{$replies->user->name}}
+            <span> <i class="fa fa-reply" aria-hidden="true"></i> {{$replies->user_to_replies->user->name}} </span>
             @auth
                 @if(auth()->user()->id == $replies->user_id)
             <a class="btn btn-danger delete" href="{{route('delete-comment',['id'=>$replies->id])}}">Delete</a>
                 @endif
             @endauth
         </h5>
-        <p>
             {{$replies->description}}
             @auth
-                <a href="#" data-toggle="modal" data-target="#commentReplie{{$replies->id}}" style="margin-top: 10px">reply</a>
+                    <a href="#" data-toggle="modal" data-target="#commentReplie{{$replies->id}}" style="margin-top: 10px">
+                        <i class="fa fa-comment" aria-hidden="true"> Reply</i>
+                    </a>
             @endauth
-        </p>
 
     </div>
 </div>
@@ -30,7 +30,7 @@
                 <div class="modal-content" style="padding: 5px">
                     <div class="form-group">
                         <label>Comment</label>
-                        <textarea class="form-control" name="description" required style="min-height: 150px"></textarea>
+                        <textarea class="form-control" name="description" required></textarea>
                     </div>
 
                     <input type="hidden" name="post_id" value="{{$post->id}}">
@@ -48,5 +48,4 @@
         @foreach ($replies->replies as $comment)
             @include('replies', ['replies' => $comment])
         @endforeach
-
 @endif

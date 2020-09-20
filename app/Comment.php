@@ -9,6 +9,8 @@ class Comment extends Model
 
     protected $fillable = ['user_id','description','parent_id','post_id'];
 
+    protected $appends = ['users'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }
@@ -21,6 +23,10 @@ class Comment extends Model
     public function replies()
     {
         return $this->children()->with('replies');
+    }
+
+    public function getUserToRepliesAttribute(){
+        return $this->belongsTo($this,'parent_id','id')->with('user')->first();
     }
 }
 
