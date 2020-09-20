@@ -26,7 +26,7 @@ class MainController extends Controller
     }
 
     public function create_comment(Request $request){
-        Comment::create($request->all() + ['user_id' => 1]);
+        Comment::create($request->all() + ['user_id' => auth()->user()->id]);
         return back();
     }
 

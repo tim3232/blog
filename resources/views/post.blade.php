@@ -79,7 +79,6 @@
                             </h5>
                             <p>
                                 {{$comment->description}}
-                                {{--<a href="#" data-toggle="modal" data-target="#modal{{$comment->id}}" style="margin-top: 10px">change</a>--}}
                                 @auth
                                     <a href="#" data-toggle="modal" style="margin-top: 10px" data-target="#commentReplie{{$comment->id}}">reply</a>
                                 @endauth
