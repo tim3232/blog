@@ -64,12 +64,14 @@
                     </form>
                 </div>
             @endif
-            <div class="row" style="margin-top: 20px">
+
+                <div class="row" style="margin-top: 20px">
             @foreach($post->comments as $comment)
 
                     <div class="media col-md-12">
                         <img class="mr-3" src="http://fakeimg.pl/50x50" alt="Generic placeholder image">
-                        <div class="media-body">
+
+                        <div class="media-body" style="word-break: break-all;">
                             <h5 class="mt-0">{{$comment->user->name}}
                                 @auth
                                     @if(auth()->user()->id == $comment->user_id)
@@ -77,12 +79,11 @@
                                     @endif
                                 @endauth
                             </h5>
-                            <p>
+
                                 {{$comment->description}}
                                 @auth
                                     <a href="#" data-toggle="modal" style="margin-top: 10px" data-target="#commentReplie{{$comment->id}}">reply</a>
                                 @endauth
-                            </p>
 
                             @foreach($comment->replies as $replies)
                                 @include('replies', ['replies' => $replies])
@@ -99,7 +100,7 @@
 
                                     <div class="form-group">
                                         <label>Comment</label>
-                                        <textarea class="form-control" name="description" required style="min-height: 150px"></textarea>
+                                        <textarea class="form-control" name="description" required></textarea>
                                     </div>
 
                                     <input type="hidden" name="post_id" value="{{$post->id}}">
