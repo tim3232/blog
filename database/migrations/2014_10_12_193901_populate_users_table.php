@@ -16,6 +16,7 @@ class PopulateUsersTable extends Migration
             'name' => 'admin',
             'password' => Hash::make(12345678),
             'right' => 1,
+            'status' => 1,
         ]);
 
         DB::table('users')->insert([
@@ -23,6 +24,7 @@ class PopulateUsersTable extends Migration
             'name' => 'user',
             'password' => Hash::make(12345678),
             'right' => 0,
+            'status' => 1,
         ]);
     }
 
